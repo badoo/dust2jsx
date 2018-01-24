@@ -1,0 +1,29 @@
+{
+  "name": "dust2jsx",
+  "version": "0.1.0",
+  "description": "Create JSX code from Dust template",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "test": "mocha test/index.js --exit",
+    "test:watch": "nodemon --ext js,json --watch src --watch test --exec 'npm run test'"
+  },
+  "keywords": [
+    "dust",
+    "jsx",
+    "pegjs"
+  ],
+  "author": {
+    "name": "Milos Popovic",
+    "email": "the.elephant@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-files": "^1.4.0",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.11"
+  }
+}
