@@ -1,4 +1,18 @@
+const pegjs = require('pegjs');
+
 const parser = require('./parser');
+
+const visitor = pegjs.compiler.visitor.build({
+    body: function(node) {
+        console.log('BODY', node);
+    },
+    buffer: function(node) {
+        console.log('BUFFER', node);
+    },
+    format: function(node) {
+        console.log('FORMAT', node);
+    }
+});
 
 function jsx(tokens) {
     switch (tokens[0]) {
@@ -15,6 +29,7 @@ function jsx(tokens) {
 
 function dust2jsx(code) {
     const tokens = parser.parse(code);
+    console.log(tokens);
     return jsx(tokens);
 }
 

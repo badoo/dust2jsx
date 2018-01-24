@@ -21,7 +21,11 @@ describe('dust2jsx', () => {
     });
 
     it('should convert plain template', () => {
-        const result = dust2jsx(readFile('test/examples/plain.dust.html'));
+        const result = dust2jsx(readFile('test/examples/plain.html'));
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
+    });
+
+    it('should recognize conditions in template', () => {
+        const result = dust2jsx(readFile('test/examples/condition.html'));
     });
 });
