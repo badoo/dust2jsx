@@ -1,7 +1,5 @@
 const parser = require('./parser');
 
-
-
 function jsx(tokens) {
     switch (tokens[0]) {
     case 'body':
