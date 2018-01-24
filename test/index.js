@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const chai = require('chai');
 const chaiFiles = require('chai-files');
 
@@ -8,6 +10,10 @@ const file = chaiFiles.file;
 
 const dust2jsx = require('../src');
 
+function readFile(filepath) {
+    return fs.readFileSync(path.join(__dirname, '..', filepath), 'utf8');
+}
+
 describe('dust2jsx', () => {
 
     it('should be defined', () => {
@@ -15,7 +21,7 @@ describe('dust2jsx', () => {
     });
 
     it('should convert plain template', () => {
-        const result = dust2jsx(file('test/examples/plain.dust.html'));
+        const result = dust2jsx(readFile('test/examples/plain.dust.html'));
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 });
