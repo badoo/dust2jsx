@@ -14,6 +14,10 @@ const visitor = pegjs.compiler.visitor.build({
     }
 });
 
+function replaceClass(html) {
+    return html.replace(' class="', ' className="');
+}
+
 function printJsx(node) {
     switch (node[0]) {
     case 'body':
@@ -22,7 +26,7 @@ function printJsx(node) {
 
     case 'buffer':
     case 'format':
-        return node[1];
+        return replaceClass(node[1]);
         break;
 
     default:
