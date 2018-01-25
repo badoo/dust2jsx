@@ -44,6 +44,10 @@ function printJsx(node) {
         return node.slice(1).join('');
         break;
 
+    case 'reference':
+        return `{${node[1].text}}`;
+        break;
+
     default:
         return '';
         break;

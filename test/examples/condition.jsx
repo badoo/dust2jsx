@@ -6,7 +6,7 @@
 
   {content ?
   <div className="content">
-    <p></p>
+    <p>{text}</p>
   </div>
    : null}
 </div>
