@@ -25,7 +25,8 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 
-    it('should recognize conditions in template', () => {
+    xit('should recognize conditions in template', () => {
         const result = dust2jsx(readFile('test/examples/condition.html'));
+        expect(result).to.be.equal(file('test/examples/condition.jsx'));
     });
 });

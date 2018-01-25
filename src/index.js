@@ -14,23 +14,27 @@ const visitor = pegjs.compiler.visitor.build({
     }
 });
 
-function jsx(tokens) {
-    switch (tokens[0]) {
+function printJsx(node) {
+    switch (node[0]) {
     case 'body':
-        return tokens.slice(1).reduce((memo, item) => {
-            if (['buffer', 'format'].includes(item[0])) {
-                memo += item[1];
-            }
-            return memo;
-        }, '');
+        return node.slice(1).reduce((memo, item) => memo + printJsx(item), '');
+        break;
+
+    case 'buffer':
+    case 'format':
+        return node[1];
+        break;
+
+    default:
+        return '';
         break;
     }
 }
 
 function dust2jsx(code) {
     const tokens = parser.parse(code);
-    console.log(tokens);
-    return jsx(tokens);
+    //console.log(tokens);
+    return printJsx(tokens);
 }
 
 module.exports = dust2jsx;
