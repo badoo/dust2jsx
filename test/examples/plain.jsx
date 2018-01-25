@@ -1,1 +1,1 @@
-<div className="foo"></div>
+<div className="foo">{bar.baz}</div>
