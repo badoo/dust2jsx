@@ -1,5 +1,12 @@
-<div class="{?isActive} is-active {/isActive}">
-  {#items}
-  <div class="js-item"></div>
-  {/items}
+<div>
+
+  {?title}
+  <h1 class="title"></h1>
+  {/title}
+
+  {?content}
+  <div class="content">
+    <p>{text}</p>
+  </div>
+  {/content}
 </div>

@@ -2,17 +2,29 @@ const pegjs = require('pegjs');
 
 const parser = require('./parser');
 
-const visitor = pegjs.compiler.visitor.build({
-    body: function(node) {
-        console.log('BODY', node);
-    },
-    buffer: function(node) {
-        console.log('BUFFER', node);
-    },
-    format: function(node) {
-        console.log('FORMAT', node);
+function replaceDustConditions(node) {
+    switch (node[0]) {
+    case 'body':
+        return [
+            node[0],
+            ...node.slice(1).map(replaceDustConditions)
+        ];
+        break;
+
+    case '?':
+        return [
+            'body',
+            ['buffer', `{${node[1].text} ?`],
+            node[4][1][2],
+            ['buffer', ' : null}']
+        ];
+        break;
+
+    default:
+        return node;
+        break;
     }
-});
+}
 
 function replaceClass(html) {
     return html.replace(' class="', ' className="');
@@ -25,8 +37,11 @@ function printJsx(node) {
         break;
 
     case 'buffer':
-    case 'format':
         return replaceClass(node[1]);
+        break;
+
+    case 'format':
+        return node.slice(1).join('');
         break;
 
     default:
@@ -36,8 +51,8 @@ function printJsx(node) {
 }
 
 function dust2jsx(code) {
-    const tokens = parser.parse(code);
-    //console.log(tokens);
+    let tokens = parser.parse(code);
+    tokens = replaceDustConditions(tokens);
     return printJsx(tokens);
 }
 
