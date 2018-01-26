@@ -2,16 +2,17 @@ const pegjs = require('pegjs');
 
 const parser = require('./parser');
 
-function replaceDustConditions(node) {
+function replaceDustSyntax(node) {
     switch (node[0]) {
     case 'body':
         return [
             node[0],
-            ...node.slice(1).map(replaceDustConditions)
+            ...node.slice(1).map(replaceDustSyntax)
         ];
         break;
 
     case '?':
+        // Conditions
         return [
             'body',
             ['buffer', `{${node[1].text} ?`],
@@ -19,6 +20,16 @@ function replaceDustConditions(node) {
             ['buffer', ' : null}']
         ];
         break;
+
+    case '@':
+        // Component
+        const params = node[3].slice(1)
+            .map(param => `${param[1][1]}="${param[2][1]}"`);
+        return [
+            'buffer',
+            `<${node[1].text} ${params.join(' ')}/>`
+        ]
+        break
 
     default:
         return node;
@@ -56,7 +67,7 @@ function printJsx(node) {
 
 function dust2jsx(code) {
     let tokens = parser.parse(code);
-    tokens = replaceDustConditions(tokens);
+    tokens = replaceDustSyntax(tokens);
     return printJsx(tokens);
 }
 
