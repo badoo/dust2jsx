@@ -39,4 +39,9 @@ describe('dust2jsx', () => {
         const result = dust2jsx(readFile('test/examples/loop.html'));
         expect(result).to.be.equal(file('test/examples/loop.jsx'));
     });
+
+    it('should convert lexemes', () => {
+        const result = dust2jsx(readFile('test/examples/lexeme.html'));
+        expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
+    });
 });

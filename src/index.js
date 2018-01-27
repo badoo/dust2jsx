@@ -29,7 +29,21 @@ function replaceDustSyntax(node) {
             'buffer',
             `<${node[1].text} ${params.join(' ')}/>`
         ]
-        break
+        break;
+
+    case '#':
+        // Lexeme
+        if (node[1].text === '_t') {
+            const body = node[4][1][2];
+            const lexeme = body[1][1].text;
+            return [
+                'buffer',
+                `{nelly.get('${lexeme}')}`
+            ]
+        }
+
+        return node;
+        break;
 
     default:
         return node;
