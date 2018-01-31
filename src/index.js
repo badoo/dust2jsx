@@ -18,7 +18,6 @@ function replaceCondition(node) {
             replaceDust(node[4][1][2]),
             ['buffer', ')}'],
         ];
-        break;
 
     default:
 
@@ -38,7 +37,6 @@ function replaceCondition(node) {
             replaceDust(body),
             ['buffer', ' : null}']
         ];
-        break;
     }
 }
 
@@ -49,12 +47,10 @@ function replaceDust(node) {
             node[0],
             ...node.slice(1).map(replaceDust)
         ];
-        break;
 
     case '?':
         // Condition
         return replaceCondition(node);
-        break;
 
     case '@':
         // Component
@@ -64,7 +60,6 @@ function replaceDust(node) {
             'buffer',
             `<${node[1].text} ${params.join(' ')}/>`
         ]
-        break;
 
     case '#':
         // Lexeme
@@ -85,11 +80,9 @@ function replaceDust(node) {
             replaceDust(node[4][1][2]),
             ['buffer', ')}']
         ];
-        break;
 
     default:
         return node;
-        break;
     }
 }
 
@@ -101,23 +94,18 @@ function printJsx(node) {
     switch (node[0]) {
     case 'body':
         return node.slice(1).reduce((memo, item) => memo + printJsx(item), '');
-        break;
 
     case 'buffer':
         return replaceClass(node[1]);
-        break;
 
     case 'format':
         return node.slice(1).join('');
-        break;
 
     case 'reference':
         return `{${node[1].text}}`;
-        break;
 
     default:
         return '';
-        break;
     }
 }
 
