@@ -2,54 +2,58 @@ const pegjs = require('pegjs');
 
 const parser = require('./parser');
 
-function replaceDustSyntax(node) {
+function replaceCondition(node) {
+    const body = node[4][1][2];
+    const literal = node[4][1][1];
+
+    switch (literal[1]) {
+    case 'else':
+
+        // {:else} provided
+        return [
+            'body',
+            ['buffer', `{${node[1].text} ? (`],
+            replaceDust(node[4][2][2]),
+            ['buffer', ') : ('],
+            replaceDust(node[4][1][2]),
+            ['buffer', ')}'],
+        ];
+        break;
+
+    default:
+
+        // Inline condition block - print out as string
+        if (node.location.start.line === node.location.end.line) {
+            return [
+                'body',
+                ['buffer', `{${node[1].text} ? `],
+                ['buffer', `'${body[1][1]}' : ''}`]
+            ];
+        }
+
+        // Regular condition block
+        return [
+            'body',
+            ['buffer', `{${node[1].text} ?`],
+            replaceDust(body),
+            ['buffer', ' : null}']
+        ];
+        break;
+    }
+}
+
+function replaceDust(node) {
     switch (node[0]) {
     case 'body':
         return [
             node[0],
-            ...node.slice(1).map(replaceDustSyntax)
+            ...node.slice(1).map(replaceDust)
         ];
         break;
 
     case '?':
         // Condition
-        const body = node[4][1][2];
-        const literal = node[4][1][1];
-
-        switch (literal[1]) {
-        case 'else':
-
-            // {:else} provided
-            return [
-                'body',
-                ['buffer', `{${node[1].text} ? (`],
-                replaceDustSyntax(node[4][2][2]),
-                ['buffer', ') : ('],
-                replaceDustSyntax(node[4][1][2]),
-                ['buffer', ')}'],
-            ];
-            break;
-
-        default:
-
-            // Inline condition block - print out as string
-            if (node.location.start.line === node.location.end.line) {
-                return [
-                    'body',
-                    ['buffer', `{${node[1].text} ? `],
-                    ['buffer', `'${body[1][1]}' : ''}`]
-                ];
-            }
-
-            // Regular condition block
-            return [
-                'body',
-                ['buffer', `{${node[1].text} ?`],
-                replaceDustSyntax(body),
-                ['buffer', ' : null}']
-            ];
-            break;
-        }
+        return replaceCondition(node);
         break;
 
     case '@':
@@ -78,7 +82,7 @@ function replaceDustSyntax(node) {
         return [
             'body',
             ['buffer', `{${node[1].text}.map(item =>`],
-            replaceDustSyntax(node[4][1][2]),
+            replaceDust(node[4][1][2]),
             ['buffer', ')}']
         ];
         break;
@@ -119,7 +123,7 @@ function printJsx(node) {
 
 function dust2jsx(code) {
     let tokens = parser.parse(code);
-    tokens = replaceDustSyntax(tokens);
+    tokens = replaceDust(tokens);
     return printJsx(tokens);
 }
 

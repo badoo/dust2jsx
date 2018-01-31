@@ -25,7 +25,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 
-    describe.only('conditions', () => {
+    describe('conditions', () => {
 
         it('should convert conditions', () => {
             const result = dust2jsx(readFile('test/examples/condition.html'));
