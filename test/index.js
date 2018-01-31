@@ -35,7 +35,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/component.jsx'));
     });
 
-    xit('should convert loops', () => {
+    it('should convert loops', () => {
         const result = dust2jsx(readFile('test/examples/loop.html'));
         expect(result).to.be.equal(file('test/examples/loop.jsx'));
     });

@@ -16,7 +16,7 @@ function replaceDustSyntax(node) {
         return [
             'body',
             ['buffer', `{${node[1].text} ?`],
-            node[4][1][2],
+            replaceDustSyntax(node[4][1][2]),
             ['buffer', ' : null}']
         ];
         break;
@@ -42,7 +42,14 @@ function replaceDustSyntax(node) {
             ]
         }
 
-        return node;
+        // Loop
+        // TODO: Scope
+        return [
+            'body',
+            ['buffer', `{${node[1].text}.map(item =>`],
+            replaceDustSyntax(node[4][1][2]),
+            ['buffer', ')}']
+        ];
         break;
 
     default:
