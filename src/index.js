@@ -2,7 +2,12 @@ const pegjs = require('pegjs');
 
 const parser = require('./parser');
 
-function replaceCondition(node) {
+function contextualise(context) {
+    return (variable) => context ? `${context}.${variable}` : variable;
+}
+
+function replaceCondition(node, context) {
+    const ctxvar = contextualise(context);
     const body = node[4][1][2];
     const literal = node[4][1][1];
 
@@ -12,10 +17,10 @@ function replaceCondition(node) {
         // {:else} provided
         return [
             'body',
-            ['buffer', `{${node[1].text} ? (`],
-            replaceDust(node[4][2][2]),
+            ['buffer', `{${ctxvar(node[1].text)} ? (`],
+            replaceDust(node[4][2][2], context),
             ['buffer', ') : ('],
-            replaceDust(node[4][1][2]),
+            replaceDust(node[4][1][2], context),
             ['buffer', ')}'],
         ];
 
@@ -25,7 +30,7 @@ function replaceCondition(node) {
         if (node.location.start.line === node.location.end.line) {
             return [
                 'body',
-                ['buffer', `{${node[1].text} ? `],
+                ['buffer', `{${ctxvar(node[1].text)} ? `],
                 ['buffer', `'${body[1][1]}' : ''}`]
             ];
         }
@@ -33,24 +38,24 @@ function replaceCondition(node) {
         // Regular condition block
         return [
             'body',
-            ['buffer', `{${node[1].text} ?`],
-            replaceDust(body),
+            ['buffer', `{${ctxvar(node[1].text)} ?`],
+            replaceDust(body, context),
             ['buffer', ' : null}']
         ];
     }
 }
 
-function replaceDust(node) {
+function replaceDust(node, context) {
     switch (node[0]) {
     case 'body':
         return [
             node[0],
-            ...node.slice(1).map(replaceDust)
+            ...node.slice(1).map(item => replaceDust(item, context))
         ];
 
     case '?':
         // Condition
-        return replaceCondition(node);
+        return replaceCondition(node, context);
 
     case '@':
         // Component
@@ -77,7 +82,7 @@ function replaceDust(node) {
         return [
             'body',
             ['buffer', `{${node[1].text}.map(item =>`],
-            replaceDust(node[4][1][2]),
+            replaceDust(node[4][1][2], 'item'),
             ['buffer', ')}']
         ];
 
@@ -111,7 +116,7 @@ function printJsx(node) {
 
 function dust2jsx(code) {
     let tokens = parser.parse(code);
-    tokens = replaceDust(tokens);
+    tokens = replaceDust(tokens, '');
     return printJsx(tokens);
 }
 
