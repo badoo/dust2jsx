@@ -25,14 +25,22 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 
-    it('should convert conditions', () => {
-        const result = dust2jsx(readFile('test/examples/condition.html'));
-        expect(result).to.be.equal(file('test/examples/condition.jsx'));
-    });
+    describe('conditions', () => {
 
-    it('should convert inline conditions', () => {
-        const result = dust2jsx(readFile('test/examples/inline-condition.html'));
-        expect(result).to.be.equal(file('test/examples/inline-condition.jsx'));
+        it('should convert conditions', () => {
+            const result = dust2jsx(readFile('test/examples/condition.html'));
+            expect(result).to.be.equal(file('test/examples/condition.jsx'));
+        });
+
+        it('should convert inline conditions', () => {
+            const result = dust2jsx(readFile('test/examples/condition-inline.html'));
+            expect(result).to.be.equal(file('test/examples/condition-inline.jsx'));
+        });
+
+        xit('should convert :else in conditions', () => {
+            const result = dust2jsx(readFile('test/examples/condition-else.html'));
+            expect(result).to.be.equal(file('test/examples/condition-else.jsx'));
+        });
     });
 
     it('should convert components', () => {
@@ -49,8 +57,6 @@ describe('dust2jsx', () => {
         const result = dust2jsx(readFile('test/examples/lexeme.html'));
         expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
     });
-
-    // TODO {:else}
 
     // TODO {@select key=type}
     //          {@eq value="..."
