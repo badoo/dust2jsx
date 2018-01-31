@@ -66,4 +66,6 @@ describe('dust2jsx', () => {
     // TODO {@idx}
 
     // TOOO {@idx}{.}{/idx}
+
+    // TODO {! Comments !}
 });
