@@ -117,9 +117,9 @@ function printJsx(node) {
     }
 }
 
-function dust2jsx(code) {
+function dust2jsx(code, { context }={}) {
     let tokens = parser.parse(code);
-    tokens = replaceDust(tokens, '');
+    tokens = replaceDust(tokens, context || '');
     return printJsx(tokens);
 }
 
