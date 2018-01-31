@@ -12,11 +12,22 @@ function replaceDustSyntax(node) {
         break;
 
     case '?':
-        // Conditions
+        // Condition
+        const body = node[4][1][2];
+
+        // Inline condition - print out as string
+        if (node.location.start.line === node.location.end.line) {
+            return [
+                'body',
+                ['buffer', `{${node[1].text} ? `],
+                ['buffer', `'${body[1][1]}' : ''}`]
+            ];
+        }
+
         return [
             'body',
             ['buffer', `{${node[1].text} ?`],
-            replaceDustSyntax(node[4][1][2]),
+            replaceDustSyntax(body),
             ['buffer', ' : null}']
         ];
         break;

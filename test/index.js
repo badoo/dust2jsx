@@ -30,6 +30,11 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/condition.jsx'));
     });
 
+    it('should convert inline conditions', () => {
+        const result = dust2jsx(readFile('test/examples/inline-condition.html'));
+        expect(result).to.be.equal(file('test/examples/inline-condition.jsx'));
+    });
+
     it('should convert components', () => {
         const result = dust2jsx(readFile('test/examples/component.html'));
         expect(result).to.be.equal(file('test/examples/component.jsx'));
