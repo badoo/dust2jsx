@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
+    "shrink": "echo 'Remove node modules' && rm -rf node_modules && rm -f npm-shrinkwrap.json && echo 'Reinstall modules' && npm install . && echo 'Shrinkwrap' && npm shrinkwrap --dev",
     "test": "mocha test/index.js --exit",
     "test:watch": "nodemon --ext js,json,html,jsx --watch src --watch test --exec 'npm run test'"
   },
