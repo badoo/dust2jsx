@@ -31,3 +31,12 @@
   <img src="{item.src}">
 )}
 ```
+
+## Usage
+
+```js
+const dust2jsx = require('dust2jsx');
+
+dust2jsx('<input type="checkbox" {?checked}selected{/checked}/>');
+// Outputs: <input type="checkbox" {checked ? 'checked' : ''}/>
+```
