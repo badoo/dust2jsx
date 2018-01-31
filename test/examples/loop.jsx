@@ -1,7 +1,7 @@
 {images.map(item =>
 <div className="item">
   {item.match ?
-    <div>{foo}</div>
+    <div>{item.foo}</div>
    : null}
 </div>
 )}

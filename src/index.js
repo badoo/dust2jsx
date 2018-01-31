@@ -53,6 +53,10 @@ function replaceDust(node, context) {
             ...node.slice(1).map(item => replaceDust(item, context))
         ];
 
+    case 'reference':
+        node[1].text = contextualise(context)(node[1].text);
+        return node;
+
     case '?':
         // Condition
         return replaceCondition(node, context);
@@ -78,7 +82,6 @@ function replaceDust(node, context) {
         }
 
         // Loop
-        // TODO: Scope
         return [
             'body',
             ['buffer', `{${node[1].text}.map(item =>`],
