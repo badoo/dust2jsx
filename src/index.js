@@ -14,22 +14,42 @@ function replaceDustSyntax(node) {
     case '?':
         // Condition
         const body = node[4][1][2];
+        const literal = node[4][1][1];
 
-        // Inline condition - print out as string
-        if (node.location.start.line === node.location.end.line) {
+        switch (literal[1]) {
+        case 'else':
+
+            // {:else} provided
             return [
                 'body',
-                ['buffer', `{${node[1].text} ? `],
-                ['buffer', `'${body[1][1]}' : ''}`]
+                ['buffer', `{${node[1].text} ? (`],
+                replaceDustSyntax(node[4][2][2]),
+                ['buffer', ') : ('],
+                replaceDustSyntax(node[4][1][2]),
+                ['buffer', ')}'],
             ];
-        }
+            break;
 
-        return [
-            'body',
-            ['buffer', `{${node[1].text} ?`],
-            replaceDustSyntax(body),
-            ['buffer', ' : null}']
-        ];
+        default:
+
+            // Inline condition block - print out as string
+            if (node.location.start.line === node.location.end.line) {
+                return [
+                    'body',
+                    ['buffer', `{${node[1].text} ? `],
+                    ['buffer', `'${body[1][1]}' : ''}`]
+                ];
+            }
+
+            // Regular condition block
+            return [
+                'body',
+                ['buffer', `{${node[1].text} ?`],
+                replaceDustSyntax(body),
+                ['buffer', ' : null}']
+            ];
+            break;
+        }
         break;
 
     case '@':

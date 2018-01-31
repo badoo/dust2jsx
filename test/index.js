@@ -25,7 +25,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 
-    describe('conditions', () => {
+    describe.only('conditions', () => {
 
         it('should convert conditions', () => {
             const result = dust2jsx(readFile('test/examples/condition.html'));
@@ -37,7 +37,7 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/condition-inline.jsx'));
         });
 
-        xit('should convert :else in conditions', () => {
+        it('should convert :else in conditions', () => {
             const result = dust2jsx(readFile('test/examples/condition-else.html'));
             expect(result).to.be.equal(file('test/examples/condition-else.jsx'));
         });
