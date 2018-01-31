@@ -44,4 +44,15 @@ describe('dust2jsx', () => {
         const result = dust2jsx(readFile('test/examples/lexeme.html'));
         expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
     });
+
+    // TODO {:else}
+
+    // TODO {@select key=type}
+    //          {@eq value="..."
+
+    // TODO {text|s}
+
+    // TODO {@idx}
+
+    // TOOO {@idx}{.}{/idx}
 });
