@@ -3,3 +3,9 @@
 <p id="{id}" dangerouslySetInnerHTML={{__html: text}}>
   
 </p>
+
+{footer ?
+  <footer>
+    <span dangerouslySetInnerHTML={{__html: footer}}></span>
+  </footer>
+ : null}

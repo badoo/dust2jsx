@@ -1,6 +1,7 @@
 const pegjs = require('pegjs');
 
 const parser = require('./parser');
+const replaceInlinePartials = require('./replace-inline-partials');
 const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
 
 function contextualise(context) {
@@ -181,6 +182,7 @@ function printJsx(node) {
 
 function dust2jsx(code, { context }={}) {
     let tokens = parser.parse(code);
+    tokens = replaceInlinePartials(tokens);
     tokens = replaceDust(tokens, context || '');
     dangerouslySetInnerHTML(tokens);
     return printJsx(tokens);

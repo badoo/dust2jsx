@@ -96,8 +96,8 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/comments.jsx'));
     });
 
-    // TODO {> inline-partial /}
-    xit('should replace inline partials', () => {
+    // {> inline-partial /}
+    it('should replace inline partials', () => {
         const result = dust2jsx(readFile('test/examples/inline-partial.html'));
         expect(result).to.be.equal(file('test/examples/inline-partial.jsx'));
     });
