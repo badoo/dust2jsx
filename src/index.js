@@ -94,6 +94,37 @@ function replaceDust(node, context) {
     }
 }
 
+function lookaheadUnescapedHtml(node) {
+    function html(node, ndx, arr) {
+        if ('reference' === node[0] && 's' === node[2][1]) {
+            const prev = arr[ndx-1];
+            switch (prev[0]) {
+            case 'buffer':
+            case 'format':
+                //TODO if (prev[1].endsWith('>')
+                prev[1] += `dangerouslySetInnerHTML={{__html: ${node[1].text}}}`;
+                arr[ndx-1] = prev;
+                arr.splice(ndx, 1);
+                break;
+            }
+        }
+    }
+    function visit(node) {
+        switch (node[0]) {
+        case 'body':
+            node.forEach(html);
+            return node;
+
+        default:
+            if (node[4] && 'bodies' === node[4][1]) {
+                node[4][1].splice(1).forEach(visit);
+            }
+            return node;
+        }
+    }
+    visit(node);
+}
+
 function replaceClass(html) {
     return html.replace(' class="', ' className="');
 }
@@ -120,6 +151,7 @@ function printJsx(node) {
 function dust2jsx(code, { context }={}) {
     let tokens = parser.parse(code);
     tokens = replaceDust(tokens, context || '');
+    lookaheadUnescapedHtml(tokens);
     return printJsx(tokens);
 }
 

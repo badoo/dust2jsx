@@ -60,12 +60,28 @@ describe('dust2jsx', () => {
 
     // TODO {@select key=type}
     //          {@eq value="..."
+    xit('should convert switches', () => {
+        const result = dust2jsx(readFile('test/examples/switches.html'));
+        expect(result).to.be.equal(file('test/examples/switches.jsx'));
+    });
+
 
     // TODO {text|s}
+    xit('should keep unescaped html', () => {
+        const result = dust2jsx(readFile('test/examples/unescaped.html'));
+        expect(result).to.be.equal(file('test/examples/unescaped.jsx'));
+    });
 
     // TODO {@idx}
-
     // TOOO {@idx}{.}{/idx}
+    xit('should recognize index in loops', () => {
+        const result = dust2jsx(readFile('test/examples/index.html'));
+        expect(result).to.be.equal(file('test/examples/index.jsx'));
+    });
 
     // TODO {! Comments !}
+    xit('should keep comments', () => {
+        const result = dust2jsx(readFile('test/examples/comments.html'));
+        expect(result).to.be.equal(file('test/examples/comments.jsx'));
+    });
 });
