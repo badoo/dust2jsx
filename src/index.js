@@ -109,7 +109,7 @@ function replaceDust(node, context) {
         return [
             'buffer',
             `{/*${node[1]}*/}`
-        ]
+        ];
 
     case '?':
     case '^':
@@ -130,7 +130,7 @@ function replaceDust(node, context) {
         return [
             'buffer',
             `<${node[1].text} ${params.join(' ')}/>`
-        ]
+        ];
 
     case '#':
         // Lexeme
@@ -140,7 +140,7 @@ function replaceDust(node, context) {
             return [
                 'buffer',
                 `{nelly.get('${lexeme}')}`
-            ]
+            ];
         }
 
         // Loop

@@ -20,7 +20,7 @@ describe('dust2jsx', () => {
         expect(dust2jsx).to.not.be.undefined;
     });
 
-    it('should convert plain template', () => {
+    it('should convert template', () => {
         const result = dust2jsx(readFile('test/examples/plain.html'));
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });

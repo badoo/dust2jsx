@@ -19,16 +19,9 @@ function setInnerHTML(node, ndx, arr) {
 }
 
 function visit(node) {
-    switch (node[0]) {
-    case 'body':
+    if (node[0] === 'body') {
+        node.forEach(visit);
         node.forEach(setInnerHTML);
-        break;
-
-    default:
-        if (node[4] && 'bodies' === node[4][1]) {
-            node[4][1].splice(1).forEach(visit);
-        }
-        break;
     }
 }
 
