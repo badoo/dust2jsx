@@ -33,8 +33,7 @@ function replaceInlinePartials(node) {
         }
     }
     visit(node);
-    node = replace(node, partials)
-    return node;
+    return replace(node, partials);
 }
 
 module.exports = replaceInlinePartials;

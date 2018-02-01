@@ -85,7 +85,7 @@ describe('dust2jsx', () => {
 
     // TODO {@idx}
     // TOOO {@idx}{.}{/idx}
-    xit('should recognize index in loops', () => {
+    xit('should recognize indexes in loops', () => {
         const result = dust2jsx(readFile('test/examples/index.html'));
         expect(result).to.be.equal(file('test/examples/index.jsx'));
     });
