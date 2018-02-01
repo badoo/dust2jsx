@@ -1,5 +1,5 @@
 <div dangerouslySetInnerHTML={{__html: title}}></div>
 
-<p>
-  dangerouslySetInnerHTML=text
+<p id="{id}" dangerouslySetInnerHTML={{__html: text}}>
+  
 </p>

@@ -48,6 +48,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/component.jsx'));
     });
 
+    // {#array}
     it('should convert loops', () => {
         const result = dust2jsx(readFile('test/examples/loop.html'));
         expect(result).to.be.equal(file('test/examples/loop.jsx'));
@@ -66,8 +67,8 @@ describe('dust2jsx', () => {
     });
 
 
-    // TODO {text|s}
-    xit('should keep unescaped html', () => {
+    // {text|s}
+    it('should keep unescaped html', () => {
         const result = dust2jsx(readFile('test/examples/unescaped.html'));
         expect(result).to.be.equal(file('test/examples/unescaped.jsx'));
     });
