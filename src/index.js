@@ -123,8 +123,10 @@ function replaceDust(node, context) {
         }
 
         // Component
-        const params = node[3].slice(1)
-            .map(param => `${param[1][1]}="${param[2][1]}"`);
+        const params = node[3].slice(1).map(param => {
+            const value = param[2][0] === 'literal' ? `"${param[2][1]}"` : `{${param[2].text}}`;
+            return `${param[1][1]}=${value}`;
+        });
         return [
             'buffer',
             `<${node[1].text} ${params.join(' ')}/>`
