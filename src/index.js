@@ -12,13 +12,16 @@ function replaceCondition(node, context) {
     const body = node[4][1][2];
     const literal = node[4][1][1];
 
+    // Negative or positive condition
+    const negate = node[0] === '^' ? '!' : '';
+
     switch (literal[1]) {
     case 'else':
 
         // {:else} provided
         return [
             'body',
-            ['buffer', `{${ctxvar(node[1].text)} ? (`],
+            ['buffer', `{${negate}${ctxvar(node[1].text)} ? (`],
             replaceDust(node[4][2][2], context),
             ['buffer', ') : ('],
             replaceDust(node[4][1][2], context),
@@ -31,7 +34,7 @@ function replaceCondition(node, context) {
         if (node.location.start.line === node.location.end.line) {
             return [
                 'body',
-                ['buffer', `{${ctxvar(node[1].text)} ? `],
+                ['buffer', `{${negate}${ctxvar(node[1].text)} ? `],
                 ['buffer', `'${body[1][1]}' : ''}`]
             ];
         }
@@ -39,7 +42,7 @@ function replaceCondition(node, context) {
         // Regular condition block
         return [
             'body',
-            ['buffer', `{${ctxvar(node[1].text)} ?`],
+            ['buffer', `{${negate}${ctxvar(node[1].text)} ?`],
             replaceDust(body, context),
             ['buffer', ' : null}']
         ];
@@ -65,6 +68,7 @@ function replaceDust(node, context) {
         ]
 
     case '?':
+    case '^':
         // Condition
         return replaceCondition(node, context);
 

@@ -32,6 +32,11 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/condition.jsx'));
         });
 
+        it('should convert negative conditions', () => {
+            const result = dust2jsx(readFile('test/examples/condition-negative.html'));
+            expect(result).to.be.equal(file('test/examples/condition-negative.jsx'));
+        });
+
         it('should convert inline conditions', () => {
             const result = dust2jsx(readFile('test/examples/condition-inline.html'));
             expect(result).to.be.equal(file('test/examples/condition-inline.jsx'));
@@ -81,7 +86,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/index.jsx'));
     });
 
-    // TODO {! Comments !}
+    // {! Comments !}
     it('should keep comments', () => {
         const result = dust2jsx(readFile('test/examples/comments.html'));
         expect(result).to.be.equal(file('test/examples/comments.jsx'));
