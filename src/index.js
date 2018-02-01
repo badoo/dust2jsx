@@ -49,6 +49,50 @@ function replaceCondition(node, context) {
     }
 }
 
+function replaceSwitch(node, context) {
+    const body = node[4][1][2];
+    let defaultCase = '';
+
+    // Switch cases
+    const cases = body.slice(1).filter(node => node[0] === '@').map(node => {
+        const body = node[4][1][2];
+
+        // @default
+        if (node[1].text === 'default') {
+            defaultCase = ` || 'default'`;
+            return [`'default'`, body];
+        }
+
+        // @eq key=value
+        const param = node[3][1][2];
+        const value = param[0] === 'literal' ? `'${param[1]}'` : `[${param.text}]`;
+        return [value, body];
+    });
+
+    // Construct output React "switch" structure
+    const select = node[3][1][2];
+    return [
+        'body',
+        ['buffer', '{{'],
+        ['body', ...body.splice(1).map(node => {
+            if (node[0] !== '@') {
+                return node;
+            }
+
+            const nextCase = cases.shift();
+            return [
+                'body',
+                ['buffer', `${nextCase[0]}: (`],
+                replaceDust(nextCase[1], context),
+                ['buffer', `)${cases.length > 0 ? ',' : ''}`]
+            ];
+            return node;
+        })],
+        ['buffer', `}[${select[1][1].text}${defaultCase}]}`]
+    ];
+    return node;
+}
+
 function replaceDust(node, context) {
     switch (node[0]) {
     case 'body':
@@ -73,6 +117,11 @@ function replaceDust(node, context) {
         return replaceCondition(node, context);
 
     case '@':
+        // Switch
+        if (node[1].text === 'select') {
+            return replaceSwitch(node, context);
+        }
+
         // Component
         const params = node[3].slice(1)
             .map(param => `${param[1][1]}="${param[2][1]}"`);

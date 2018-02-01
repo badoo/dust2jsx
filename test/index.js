@@ -68,10 +68,10 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
     });
 
-    // TODO {@select key=type}
-    //        {@eq value="..."
-    //        {@default}
-    xit('should convert switches', () => {
+    // {@select key=type}
+    //   {@eq value="..."
+    //   {@default}
+    it('should convert switches', () => {
         const result = dust2jsx(readFile('test/examples/switches.html'));
         expect(result).to.be.equal(file('test/examples/switches.jsx'));
     });

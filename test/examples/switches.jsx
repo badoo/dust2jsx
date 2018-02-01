@@ -1,13 +1,11 @@
 {{
-  img1: (
+  'img1': (
     <div>
       <img />
     </div>
   ),
-  img2: (
-    <Icon name=picture.value/>
+  [IMG2]: (
+    <Icon name="img2"/>
   ),
-  defaultCase: (
-    <p></p>
-  )
-}[picture || 'defaultCase']}
+  'default': (<p></p>)
+}[picture || 'default']}
