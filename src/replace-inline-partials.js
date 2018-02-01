@@ -25,12 +25,10 @@ function replaceInlinePartials(node) {
 
         case '<':
             const body = node[4][1][2];
-            //console.log(body);
             partials[node[1].text] = body.filter((item, ndx) => {
                 return !(item[0] === 'format' && (ndx === 1 || ndx === body.length -1));
             });
             partials[node[1].text] = body;
-            //console.log(partials[node[1].text]);
             break;
         }
     }
