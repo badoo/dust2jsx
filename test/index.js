@@ -60,7 +60,8 @@ describe('dust2jsx', () => {
     });
 
     // TODO {@select key=type}
-    //          {@eq value="..."
+    //        {@eq value="..."
+    //        {@default}
     xit('should convert switches', () => {
         const result = dust2jsx(readFile('test/examples/switches.html'));
         expect(result).to.be.equal(file('test/examples/switches.jsx'));
@@ -81,7 +82,7 @@ describe('dust2jsx', () => {
     });
 
     // TODO {! Comments !}
-    xit('should keep comments', () => {
+    it('should keep comments', () => {
         const result = dust2jsx(readFile('test/examples/comments.html'));
         expect(result).to.be.equal(file('test/examples/comments.jsx'));
     });

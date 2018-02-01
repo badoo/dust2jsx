@@ -58,6 +58,12 @@ function replaceDust(node, context) {
         node[1].text = contextualise(context)(node[1].text);
         return node;
 
+    case 'comment':
+        return [
+            'buffer',
+            `{/*${node[1]}*/}`
+        ]
+
     case '?':
         // Condition
         return replaceCondition(node, context);
