@@ -25,6 +25,8 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/plain.jsx'));
     });
 
+    // {?...}
+    // {^...}
     describe('conditions', () => {
 
         it('should convert conditions', () => {
@@ -48,6 +50,7 @@ describe('dust2jsx', () => {
         });
     });
 
+    // {@Component/}
     it('should convert components', () => {
         const result = dust2jsx(readFile('test/examples/component.html'));
         expect(result).to.be.equal(file('test/examples/component.jsx'));
@@ -59,6 +62,7 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/loop.jsx'));
     });
 
+    // {#_t}
     it('should convert lexemes', () => {
         const result = dust2jsx(readFile('test/examples/lexeme.html'));
         expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
