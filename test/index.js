@@ -32,7 +32,7 @@ describe('dust2jsx', () => {
 
     // {?...}
     // {^...}
-    describe('conditions', () => {
+    describe('(?^) conditions', () => {
 
         it('should convert conditions', () => {
             const result = dust2jsx(readFile('test/examples/condition.html'));
@@ -53,46 +53,79 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/condition-else.html'));
             expect(result).to.be.equal(file('test/examples/condition-else.jsx'));
         });
+
+        // TODO
+        // {@if cond="
+        xit('should recognize @if conditions', () => {
+            const result = dust2jsx(readFile('test/examples/condition-if.html'));
+            expect(result).to.be.equal(file('test/examples/condition-if.jsx'));
+        });
     });
 
-    // {@Component/}
-    it('should convert components', () => {
-        const result = dust2jsx(readFile('test/examples/component.html'));
-        expect(result).to.be.equal(file('test/examples/component.jsx'));
+    describe('(@) components', () => {
+
+        // {@Component/}
+        it('should convert custom components', () => {
+            const result = dust2jsx(readFile('test/examples/component.html'));
+            expect(result).to.be.equal(file('test/examples/component.jsx'));
+        });
+
+        // TODO
+        // {@Component text=text}
+        //   {:icon}
+        //     {@Icon/}
+        // {/Component}
+        xit('should recognize literal blocks inside component', () => {
+            const result = dust2jsx(readFile('test/examples/component-literal.html'));
+            expect(result).to.be.equal(file('test/examples/component-literal.jsx'));
+        });
+
+        // {@select key=type}
+        //   {@eq value="..."
+        //   {@default}
+        it('should convert switches', () => {
+            const result = dust2jsx(readFile('test/examples/switches.html'));
+            expect(result).to.be.equal(file('test/examples/switches.jsx'));
+        });
+
+        // TODO
+        // {@idx}
+        // {@idx}{.}{/idx}
+        xit('should recognize indexes in loops', () => {
+            const result = dust2jsx(readFile('test/examples/index.html'));
+            expect(result).to.be.equal(file('test/examples/index.jsx'));
+        });
     });
 
-    // {#array}
-    it('should convert loops', () => {
-        const result = dust2jsx(readFile('test/examples/loop.html'));
-        expect(result).to.be.equal(file('test/examples/loop.jsx'));
-    });
+    describe('(#) loops', () => {
 
-    // {#_t}
-    it('should convert lexemes', () => {
-        const result = dust2jsx(readFile('test/examples/lexeme.html'));
-        expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
-    });
+        // {#array}
+        it('should convert loops', () => {
+            const result = dust2jsx(readFile('test/examples/loop.html'));
+            expect(result).to.be.equal(file('test/examples/loop.jsx'));
+        });
 
-    // {@select key=type}
-    //   {@eq value="..."
-    //   {@default}
-    it('should convert switches', () => {
-        const result = dust2jsx(readFile('test/examples/switches.html'));
-        expect(result).to.be.equal(file('test/examples/switches.jsx'));
-    });
+        // TODO
+        // {#array}
+        // ...
+        // {:else}
+        // ...
+        xit('should recognize :else condition in loops', () => {
+            const result = dust2jsx(readFile('test/examples/loop-else.html'));
+            expect(result).to.be.equal(file('test/examples/loop-else.jsx'));
+        });
 
+        // {#_t}
+        it('should convert lexemes', () => {
+            const result = dust2jsx(readFile('test/examples/lexeme.html'));
+            expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
+        });
+    });
 
     // {text|s}
     it('should keep unescaped html', () => {
         const result = dust2jsx(readFile('test/examples/unescaped.html'));
         expect(result).to.be.equal(file('test/examples/unescaped.jsx'));
-    });
-
-    // TODO {@idx}
-    // TOOO {@idx}{.}{/idx}
-    xit('should recognize indexes in loops', () => {
-        const result = dust2jsx(readFile('test/examples/index.html'));
-        expect(result).to.be.equal(file('test/examples/index.jsx'));
     });
 
     // {! Comments !}
@@ -105,5 +138,11 @@ describe('dust2jsx', () => {
     it('should replace inline partials', () => {
         const result = dust2jsx(readFile('test/examples/inline-partial.html'));
         expect(result).to.be.equal(file('test/examples/inline-partial.jsx'));
+    });
+
+    // TODO
+    xit('should convert svg content', () => {
+        const result = dust2jsx(readFile('test/examples/svg.html'));
+        expect(result).to.be.equal(file('test/examples/svg.jsx'));
     });
 });
