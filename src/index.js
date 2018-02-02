@@ -4,6 +4,8 @@ const parser = require('./parser');
 const replaceInlinePartials = require('./replace-inline-partials');
 const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
 
+const LOOP_VARIABLE = 'item';
+
 function contextualise(context) {
     return (variable) => context ? `${context}.${variable}` : variable;
 }
@@ -66,7 +68,7 @@ function replaceSwitch(node, context) {
 
         // @eq key=value
         const param = node[3][1][2];
-        const value = param[0] === 'literal' ? `'${param[1]}'` : `[${param.text}]`;
+        const value = param[0] === 'literal' ? `'${param[1]}'` : `[${contextualise(context)(param.text)}]`;
         return [value, body];
     });
 
@@ -89,7 +91,7 @@ function replaceSwitch(node, context) {
             ];
             return node;
         })],
-        ['buffer', `}[${select[1][1].text}${defaultCase}]}`]
+        ['buffer', `}[${contextualise(context)(select[1][1].text)}${defaultCase}]}`]
     ];
     return node;
 }
@@ -125,7 +127,7 @@ function replaceDust(node, context) {
 
         // Component
         const params = node[3].slice(1).map(param => {
-            const value = param[2][0] === 'literal' ? `"${param[2][1]}"` : `{${param[2].text}}`;
+            const value = param[2][0] === 'literal' ? `"${param[2][1]}"` : `{${contextualise(context)(param[2].text)}}`;
             return `${param[1][1]}=${value}`;
         });
         return [
@@ -147,8 +149,8 @@ function replaceDust(node, context) {
         // Loop
         return [
             'body',
-            ['buffer', `{${node[1].text}.map(item =>`],
-            replaceDust(node[4][1][2], 'item'),
+            ['buffer', `{${contextualise(context)(node[1].text)}.map(${LOOP_VARIABLE} =>`],
+            replaceDust(node[4][1][2], LOOP_VARIABLE),
             ['buffer', ')}']
         ];
 

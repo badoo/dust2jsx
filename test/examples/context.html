@@ -1,0 +1,21 @@
+<p>{title}</p>
+
+{?text}
+<div class="header">
+  <div>
+    <p>{text}</p>
+  </div>
+</div>
+{/text}
+
+{#images}
+<img src="{img.src}">{foo}</div>
+{/images}
+
+{@select key="{picture}"}
+  {@eq value=IMG2}
+    {@Icon name=picture.value/}
+  {/eq}
+{/select}
+
+{@Footer text=text/}
