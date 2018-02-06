@@ -3,6 +3,7 @@ const pegjs = require('pegjs');
 const parser = require('./parser');
 const replaceInlinePartials = require('./replace-inline-partials');
 const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
+const printJsx = require('./print-jsx');
 
 const LOOP_VARIABLE = 'item';
 
@@ -156,29 +157,6 @@ function replaceDust(node, context) {
 
     default:
         return node;
-    }
-}
-
-function replaceClass(html) {
-    return html.replace(' class="', ' className="');
-}
-
-function printJsx(node) {
-    switch (node[0]) {
-    case 'body':
-        return node.slice(1).reduce((memo, item) => memo + printJsx(item), '');
-
-    case 'buffer':
-        return replaceClass(node[1]);
-
-    case 'format':
-        return node.slice(1).join('');
-
-    case 'reference':
-        return `{${node[1].text}}`;
-
-    default:
-        return '';
     }
 }
 
