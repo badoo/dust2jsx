@@ -36,6 +36,19 @@ function replaceCondition(node, context) {
 
         // Inline condition block - print out as string
         if (node.location.start.line === node.location.end.line) {
+
+            // Attribute
+            const ATTRS_LIST = ['checked'];
+            if (ATTRS_LIST.includes(body[1][1])) {
+                return [
+                    'body',
+                    ['buffer', `${body[1][1]}={`],
+                    ['buffer', `${negate}${ctxvar(node[1].text)} ? true : undefined`],
+                    ['buffer', '}']
+                ];
+            }
+
+            // Plain inline condition
             return [
                 'body',
                 ['buffer', `{${negate}${ctxvar(node[1].text)} ? `],
