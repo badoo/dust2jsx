@@ -1,2 +1,2 @@
 <input type="checkbox" {isSelected ? 'selected' : ''}/>
-<input type="radio" checked={isChecked ? true : undefined}/>
+<input type="radio" defaultChecked={isChecked ? true : undefined}/>
