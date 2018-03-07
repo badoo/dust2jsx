@@ -120,6 +120,13 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/lexeme.html'));
             expect(result).to.be.equal(file('test/examples/lexeme.jsx'));
         });
+
+
+        // {.}
+        xit('should convert item in loop', () => {
+            const result = dust2jsx(readFile('test/examples/loop-item.html'));
+            expect(result).to.be.equal(file('test/examples/loop-item.jsx'));
+        });
     });
 
     // {text|s}
