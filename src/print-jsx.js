@@ -1,6 +1,8 @@
 
 function replaceClass(html) {
-    return html.replace(' class="', ' className="');
+    return html
+        .replace(' class="', ' className="')
+        .replace(' for="', ' htmlFor="');
 }
 
 // Output JSX code from the Dust parser AST
