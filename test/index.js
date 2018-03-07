@@ -71,6 +71,7 @@ describe('dust2jsx', () => {
         });
 
         // TODO
+        // FIXME Improve formatting
         // {@Component text=text}
         //   {:icon}
         //     {@Icon/}

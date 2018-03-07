@@ -144,6 +144,32 @@ function replaceDust(node, context) {
             const value = param[2][0] === 'literal' ? `"${param[2][1]}"` : `{${contextualise(context)(param[2].text)}}`;
             return `${param[1][1]}=${value}`;
         });
+
+
+        // Literal blocks - multiline params for Component
+        const bodies = node[4];
+        if (bodies.length > 1) {
+            const blocks = bodies.slice(1).map(param => {
+                const literal = param[1][1];
+                if (literal === 'block') {
+                    return param[2];
+                }
+
+                return [
+                    'body',
+                    ['buffer', ` ${contextualise(context)(literal)}={`],
+                    replaceDust(param[2], context),
+                    ['buffer', '}']
+                ];
+            });
+            return [
+                'body',
+                ['buffer', `<${node[1].text} ${params.join(' ')}`],
+                ['body', ...blocks],
+                ['buffer', '/>']
+            ];
+        }
+
         return [
             'buffer',
             `<${node[1].text} ${params.join(' ')}/>`
