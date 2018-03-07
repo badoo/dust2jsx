@@ -8,7 +8,13 @@ const printJsx = require('./print-jsx');
 const LOOP_VARIABLE = 'item';
 
 function contextualise(context) {
-    return (variable) => context ? `${context}.${variable}` : variable;
+    return (variable) => {
+        if (!variable) {
+            return context;
+        } else {
+            return context ? `${context}.${variable}` : variable;
+        }
+    };
 }
 
 function replaceCondition(node, context) {

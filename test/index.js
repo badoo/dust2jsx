@@ -124,7 +124,7 @@ describe('dust2jsx', () => {
 
 
         // {.}
-        xit('should convert item in loop', () => {
+        it('should convert item in loop', () => {
             const result = dust2jsx(readFile('test/examples/loop-item.html'));
             expect(result).to.be.equal(file('test/examples/loop-item.jsx'));
         });
