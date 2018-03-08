@@ -1,8 +1,9 @@
 
-function replaceClass(html) {
+function replaceAttrs(html) {
     return html
         .replace(' class="', ' className="')
-        .replace(' for="', ' htmlFor="');
+        .replace(' for="', ' htmlFor="')
+        .replace(' xlink:href="', ' xlinkHref="');
 }
 
 // Output JSX code from the Dust parser AST
@@ -12,7 +13,7 @@ function printJsx(node) {
         return node.slice(1).reduce((memo, item) => memo + printJsx(item), '');
 
     case 'buffer':
-        return replaceClass(node[1]);
+        return replaceAttrs(node[1]);
 
     case 'format':
         return node.slice(1).join('');
