@@ -57,10 +57,12 @@ function replaceCondition(node, context) {
             }
 
             // Plain inline condition
+            const singleBufferBody = body.length === 2 && body[1][0] === 'buffer';
             return [
                 'body',
                 ['buffer', `{${negate}${ctxvar(node[1].text)} ? `],
-                ['buffer', `'${body[1][1]}' : ''}`]
+                singleBufferBody ? ['buffer', `'${body[1][1]}'`] : replaceDust(body, context),
+                ['buffer', ' : \'\'}']
             ];
         }
 
