@@ -141,16 +141,6 @@ function replaceComponent(node, context) {
             }
         }
 
-        // Improve indentation for last param in blocks
-        const lastParamBody = bodies[bodies.length - 1][2];
-        let lastParamFormat = lastParamBody[lastParamBody.length - 1];
-        if (lastParamFormat[0] === 'format') {
-            lastParamBody[lastParamBody.length - 1] = [ // Remove trailing indentation
-                lastParamFormat[0],
-                lastParamFormat[1]
-            ];
-        }
-
         // Parameter blocks
         const blocks = bodies.map(param => {
             const literal = param[1][1];
