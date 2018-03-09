@@ -148,7 +148,7 @@ function replaceComponent(node, context) {
             lastParamBody[lastParamBody.length - 1] = [ // Remove trailing indentation
                 lastParamFormat[0],
                 lastParamFormat[1]
-            ];i
+            ];
         }
 
         // Parameter blocks
