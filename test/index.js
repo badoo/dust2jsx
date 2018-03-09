@@ -70,13 +70,11 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/component.jsx'));
         });
 
-        // TODO
-        // FIXME Improve formatting
         // {@Component text=text}
         //   {:icon}
         //     {@Icon/}
         // {/Component}
-        xit('should recognize literal blocks inside component', () => {
+        it('should recognize literal blocks inside component', () => {
             const result = dust2jsx(readFile('test/examples/component-literal.html'));
             expect(result).to.be.equal(file('test/examples/component-literal.jsx'));
         });
