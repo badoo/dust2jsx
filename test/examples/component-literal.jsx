@@ -9,8 +9,7 @@
 }
   />
 
-<Icon foo={bar}
-    primary={
+<Icon foo={bar} only={
     <i></i>
 }
   />

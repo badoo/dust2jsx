@@ -133,7 +133,7 @@ function replaceComponent(node, context) {
     if (bodies.length) {
 
         // Attempt to improve indentation for parameter blocks
-        let blockSeparator = ['format', '\n', '    '];
+        let blockSeparator = ['format', ' '];
         if (bodies.length > 2) {
             const firstParamFormat = bodies[0][2][bodies[0][2].length - 1];
             if (firstParamFormat[0] === 'format') {
