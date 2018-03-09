@@ -7,11 +7,11 @@
       <Bar baz="qux"/>
     </div>
 }
-  />
+/>
 
 <Icon foo={bar}
     primary={
     <i></i>
 }
-  />
+/>
 
