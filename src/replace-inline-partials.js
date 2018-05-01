@@ -29,16 +29,13 @@ function replace(node, partials) {
             ...node.slice(1).filter(node => node[0] !== '<').map(item => replace(item, partials))
         ];
 
-    case '@':
-        if (node[4].length > 1) {
-            node[4][1][2] = replace(node[4][1][2], partials);
-        }
-        return node;
-
     case '+':
         return partials[node[1].text];
 
     default:
+        if (node[4] && node[4][0] === 'bodies' && node[4].length > 1) {
+            node[4][1][2] = replace(node[4][1][2], partials);
+        }
         return node;
     }
 }
