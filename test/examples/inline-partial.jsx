@@ -7,11 +7,11 @@
   <p</p>
 </div>
 
-
-<div className="extra">
-  <svg></svg>
-</div>
-
+{{
+    'baz': (
+        <p</p>
+    )
+}[bar]}
 
 
 

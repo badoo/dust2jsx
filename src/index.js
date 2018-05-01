@@ -98,6 +98,7 @@ function replaceSwitch(node, context) {
 
     // Construct output React "switch" structure
     const select = node[3][1][2];
+    const key = select.text ? select.text : select[1][1].text;
     return [
         'body',
         ['buffer', '{{'],
@@ -115,9 +116,8 @@ function replaceSwitch(node, context) {
             ];
             return node;
         })],
-        ['buffer', `}[${contextualise(context)(select[1][1].text)}${defaultCase}]}`]
+        ['buffer', `}[${contextualise(context)(key)}${defaultCase}]}`]
     ];
-    return node;
 }
 
 function replaceComponent(node, context) {
@@ -202,6 +202,7 @@ function replaceDust(node, context) {
             return replaceSwitch(node, context);
         }
 
+        // Component
         return replaceComponent(node, context);
 
     case '#':

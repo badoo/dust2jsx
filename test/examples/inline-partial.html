@@ -3,7 +3,11 @@
   {+ foo /}
 </div>
 
-{+ extra /}
+{@select key=bar}
+    {@eq value="baz"}
+        {+foo/}
+    {/eq}
+{/select}
 
 {< extra }
 <div class="extra">
@@ -11,4 +15,4 @@
 </div>
 {/ extra }
 
-{< foo }<p</p>{/ foo }
+{<foo}<p</p>{/foo}
