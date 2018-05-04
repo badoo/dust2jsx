@@ -3,6 +3,7 @@ const pegjs = require('pegjs');
 const parser = require('./parser');
 const replaceInlinePartials = require('./replace-inline-partials');
 const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
+const improveClassNameConditions = require('./improve-class-name-conditions');
 const printJsx = require('./print-jsx');
 
 const LOOP_VARIABLE = 'item';
@@ -234,6 +235,7 @@ function dust2jsx(code, { context }={}) {
     tokens = replaceInlinePartials(tokens);
     tokens = replaceDust(tokens, context || '');
     dangerouslySetInnerHTML(tokens);
+    improveClassNameConditions(tokens);
     return printJsx(tokens);
 }
 
