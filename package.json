@@ -1,7 +1,8 @@
 {
   "name": "dust2jsx",
-  "version": "0.1.7",
-  "description": "Create JSX code from Dust template",
+  "version": "0.1.8",
+  "homepage": "https://github.com/badoo/dust2jsx",
+  "description": "Convert Dust.jsx template to JSX",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
