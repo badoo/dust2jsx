@@ -8,17 +8,14 @@ function nicerClassNameCondition(node, ndx, arr) {
 
                 // class="foo {isBar ? 'bar' : ''} baz"
                 //      ->
-                // class={"foo " + (isBar ? 'bar' : '') + " baz"}
+                // class={`foo ${isBar ? 'bar' : ''} baz`}
 
-                arr[ndx][1] = arr[ndx][1].replace('"', '{"') + '" + ';
+                arr[ndx][1] = arr[ndx][1].replace('="', '={`');
                 const body = arr[ndx+1];
                 if (body[1][1].startsWith('{')) {
-                    arr[ndx+1][1][1] = body[1][1].replace('{', '(');
+                    arr[ndx+1][1][1] = body[1][1].replace('{', '${');
                 }
-                if (body[body.length - 1][1].endsWith('}')) {
-                    arr[ndx+1][body.length - 1][1] = body[body.length - 1][1].replace('}', ')');
-                }
-                arr[ndx+2][1] = ' + "' + arr[ndx+2][1].replace('"', '"}');
+                arr[ndx+2][1] = arr[ndx+2][1].replace('"', '`}');
             }
         }
     }

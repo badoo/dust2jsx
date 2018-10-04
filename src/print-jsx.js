@@ -2,7 +2,7 @@
 function replaceAttrs(html) {
     return html
         .replace(' class="', ' className="')
-        .replace(' class={"', ' className={"')
+        .replace(' class={`', ' className={`')
         .replace(' for="', ' htmlFor="')
         .replace(' xlink:href="', ' xlinkHref="');
 }
