@@ -4,6 +4,7 @@ const parser = require('./parser');
 const replaceInlinePartials = require('./replace-inline-partials');
 const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
 const improveClassNameConditions = require('./improve-class-name-conditions');
+const removeQuotesAroundReference = require('./remove-quotes-around-reference');
 const printJsx = require('./print-jsx');
 
 const LOOP_VARIABLE = 'item';
@@ -236,6 +237,7 @@ function dust2jsx(code, { context }={}) {
     tokens = replaceDust(tokens, context || '');
     dangerouslySetInnerHTML(tokens);
     improveClassNameConditions(tokens);
+    removeQuotesAroundReference(tokens);
     return printJsx(tokens);
 }
 

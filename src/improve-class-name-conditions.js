@@ -9,6 +9,7 @@ function nicerClassNameCondition(node, ndx, arr) {
                 // class="foo {isBar ? 'bar' : ''} baz"
                 //      ->
                 // class={"foo " + (isBar ? 'bar' : '') + " baz"}
+
                 arr[ndx][1] = arr[ndx][1].replace('"', '{"') + '" + ';
                 const body = arr[ndx+1];
                 if (body[1][1].startsWith('{')) {

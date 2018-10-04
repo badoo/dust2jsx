@@ -1,5 +1,5 @@
 {thumbnail ? (
-  <img src="{thumbnail}">
+  <img src={thumbnail}>
 ) : (
   <div className="placeholder"></div>
 )}

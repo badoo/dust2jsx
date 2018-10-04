@@ -9,7 +9,7 @@
  : null}
 
 {foo.images.map(item =>
-<img src="{item.img.src}">{item.foo}</div>
+<img src={item.img.src}>{item.foo}</div>
 )}
 
 {{
