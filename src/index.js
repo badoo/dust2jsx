@@ -1,9 +1,12 @@
 const pegjs = require('pegjs');
 
 const parser = require('./parser');
+
 const dangerouslySetInnerHTML = require('./visitors/dangerously-set-inner-html');
 const improveClassNameConditions = require('./visitors/improve-class-name-conditions');
 const removeQuotesAroundReference = require('./visitors/remove-quotes-around-reference');
+
+const externals = require('./externals');
 const replaceInlinePartials = require('./replace-inline-partials');
 const printJsx = require('./print-jsx');
 
@@ -129,7 +132,6 @@ function replaceComponent(node, context) {
         return `${param[1][1]}=${value}`;
     });
 
-
     // Literal blocks - multiline params
     const bodies = node[4].slice(1);
     if (bodies.length) {
@@ -160,13 +162,16 @@ function replaceComponent(node, context) {
             ];
         });
 
-        return [
-            'body',
+        externals.push(node[1].text);
+
+        return [            'body',
             ['buffer', `<${node[1].text} ${params.join(' ')}`],
             ['body', ...blocks],
             ['buffer', '/>']
         ];
     }
+
+    externals.push(node[1].text);
 
     // Singleline params
     return [
@@ -210,6 +215,7 @@ function replaceDust(node, context) {
     case '#':
         // Lexeme
         if (node[1].text === '_t') {
+            externals.push('nelly');
             const body = node[4][1][2];
             const lexeme = body[1][1].text;
             return [
@@ -231,13 +237,18 @@ function replaceDust(node, context) {
     }
 }
 
-function dust2jsx(code, { context }={}) {
+function dust2jsx(code, { context, externals: externalsParam }={}) {
     let tokens = parser.parse(code);
     tokens = replaceInlinePartials(tokens);
     tokens = replaceDust(tokens, context || '');
     dangerouslySetInnerHTML(tokens);
     improveClassNameConditions(tokens);
     removeQuotesAroundReference(tokens);
+
+    if (externalsParam === true) {
+        return externals.get();
+    }
+
     return printJsx(tokens);
 }
 

@@ -151,4 +151,13 @@ describe('dust2jsx', () => {
         const result = dust2jsx(readFile('test/examples/svg.html'));
         expect(result).to.be.equal(file('test/examples/svg.jsx'));
     });
+
+    describe(':externals parameter', () => {
+
+        it('should extract external variables referenced in template', () => {
+            const result = dust2jsx(readFile('test/examples/plain.html'), { externals: true });
+            expect(result).to.deep.equal([]);
+        });
+
+    });
 });
