@@ -1,10 +1,10 @@
 const pegjs = require('pegjs');
 
 const parser = require('./parser');
+const dangerouslySetInnerHTML = require('./visitors/dangerously-set-inner-html');
+const improveClassNameConditions = require('./visitors/improve-class-name-conditions');
+const removeQuotesAroundReference = require('./visitors/remove-quotes-around-reference');
 const replaceInlinePartials = require('./replace-inline-partials');
-const dangerouslySetInnerHTML = require('./dangerously-set-inner-html');
-const improveClassNameConditions = require('./improve-class-name-conditions');
-const removeQuotesAroundReference = require('./remove-quotes-around-reference');
 const printJsx = require('./print-jsx');
 
 const LOOP_VARIABLE = 'item';
