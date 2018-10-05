@@ -118,6 +118,12 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/index.html'));
             expect(result).to.be.equal(file('test/examples/index.jsx'));
         });
+
+        // TODO
+        xit('should recognize @PhotoUrl helper', () => {
+            const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
+            expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
+        });
     });
 
     describe('(#) loops', () => {
@@ -166,6 +172,9 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/lexeme.html'), { externals: true });
             expect(result).to.deep.equal(['nelly']);
         });
+
+        // TODO
+        xit('should know that @if is not external', () => {});
 
     });
 });
