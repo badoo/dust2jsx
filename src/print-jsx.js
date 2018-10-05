@@ -7,6 +7,12 @@ function replaceAttrs(html) {
         .replace(' xlink:href="', ' xlinkHref="');
 }
 
+function replaceHTMLComments(html) {
+    return html.startsWith('<!--') ? html
+        .replace('<!--', '{/*')
+        .replace('-->', '*/}') : html;
+}
+
 // Output JSX code from the Dust parser AST
 function printJsx(node) {
     switch (node[0]) {
@@ -14,7 +20,7 @@ function printJsx(node) {
         return node.slice(1).reduce((memo, item) => memo + printJsx(item), '');
 
     case 'buffer':
-        return replaceAttrs(node[1]);
+        return replaceHTMLComments(replaceAttrs(node[1]));
 
     case 'format':
         return node.slice(1).join('');
