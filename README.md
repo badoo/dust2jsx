@@ -40,3 +40,14 @@ const dust2jsx = require('dust2jsx');
 dust2jsx('<input type="checkbox" {?checked}checked{/checked}/>');
 // Outputs: <input type="checkbox" {checked ? 'checked' : ''}/>
 ```
+
+### Parameters
+
+#### `externals`
+(Boolean)
+
+Outputs array of found referenced variables or Components. Optional. Default: `false`
+```js
+dust2jsc('<header><Logo shadow="true"/></header><Foo bar />', { externals: true });
+// Outputs: ['Logo', 'Foo']
+```
