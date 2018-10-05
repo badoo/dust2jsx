@@ -30,6 +30,30 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/context.jsx'));
     });
 
+    // {text|s}
+    it('should keep unescaped html', () => {
+        const result = dust2jsx(readFile('test/examples/unescaped.html'));
+        expect(result).to.be.equal(file('test/examples/unescaped.jsx'));
+    });
+
+    // {! Comments !}
+    it('should keep comments', () => {
+        const result = dust2jsx(readFile('test/examples/comments.html'));
+        expect(result).to.be.equal(file('test/examples/comments.jsx'));
+    });
+
+    // {> inline-partial /}
+    it('should replace inline partials', () => {
+        const result = dust2jsx(readFile('test/examples/inline-partial.html'));
+        expect(result).to.be.equal(file('test/examples/inline-partial.jsx'));
+    });
+
+    // TODO
+    xit('should convert svg content', () => {
+        const result = dust2jsx(readFile('test/examples/svg.html'));
+        expect(result).to.be.equal(file('test/examples/svg.jsx'));
+    });
+
     // {?...}
     // {^...}
     describe('(?^) conditions', () => {
@@ -126,30 +150,6 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/loop-item.html'));
             expect(result).to.be.equal(file('test/examples/loop-item.jsx'));
         });
-    });
-
-    // {text|s}
-    it('should keep unescaped html', () => {
-        const result = dust2jsx(readFile('test/examples/unescaped.html'));
-        expect(result).to.be.equal(file('test/examples/unescaped.jsx'));
-    });
-
-    // {! Comments !}
-    it('should keep comments', () => {
-        const result = dust2jsx(readFile('test/examples/comments.html'));
-        expect(result).to.be.equal(file('test/examples/comments.jsx'));
-    });
-
-    // {> inline-partial /}
-    it('should replace inline partials', () => {
-        const result = dust2jsx(readFile('test/examples/inline-partial.html'));
-        expect(result).to.be.equal(file('test/examples/inline-partial.jsx'));
-    });
-
-    // TODO
-    xit('should convert svg content', () => {
-        const result = dust2jsx(readFile('test/examples/svg.html'));
-        expect(result).to.be.equal(file('test/examples/svg.jsx'));
     });
 
     describe(':externals parameter', () => {
