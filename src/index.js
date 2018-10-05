@@ -164,7 +164,8 @@ function replaceComponent(node, context) {
 
         externals.push(node[1].text);
 
-        return [            'body',
+        return [
+            'body',
             ['buffer', `<${node[1].text} ${params.join(' ')}`],
             ['body', ...blocks],
             ['buffer', '/>']
@@ -238,6 +239,8 @@ function replaceDust(node, context) {
 }
 
 function dust2jsx(code, { context, externals: externalsParam }={}) {
+    externals.clear();
+
     let tokens = parser.parse(code);
     tokens = replaceInlinePartials(tokens);
     tokens = replaceDust(tokens, context || '');

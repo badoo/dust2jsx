@@ -155,8 +155,16 @@ describe('dust2jsx', () => {
     describe(':externals parameter', () => {
 
         it('should extract external variables referenced in template', () => {
-            const result = dust2jsx(readFile('test/examples/plain.html'), { externals: true });
-            expect(result).to.deep.equal([]);
+            const result1 = dust2jsx(readFile('test/examples/plain.html'), { externals: true });
+            expect(result1).to.deep.equal([]);
+
+            const result2 = dust2jsx(readFile('test/examples/component-literal.html'), { externals: true });
+            expect(result2).to.deep.equal(['Bar', 'Button', 'Icon']);
+        });
+
+        it('should recognise i18n library in templates', () => {
+            const result = dust2jsx(readFile('test/examples/lexeme.html'), { externals: true });
+            expect(result).to.deep.equal(['nelly']);
         });
 
     });
