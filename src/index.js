@@ -6,21 +6,12 @@ const dangerouslySetInnerHTML = require('./visitors/dangerously-set-inner-html')
 const improveClassNameConditions = require('./visitors/improve-class-name-conditions');
 const removeQuotesAroundReference = require('./visitors/remove-quotes-around-reference');
 
+const contextualise = require('./contextualise');
 const externals = require('./externals');
 const replaceInlinePartials = require('./replace-inline-partials');
 const printJsx = require('./print-jsx');
 
 const LOOP_VARIABLE = 'item';
-
-function contextualise(context) {
-    return (variable) => {
-        if (!variable) {
-            return context;
-        } else {
-            return context ? `${context}.${variable}` : variable;
-        }
-    };
-}
 
 function replaceCondition(node, context) {
     const ctxvar = contextualise(context);
