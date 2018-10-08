@@ -173,6 +173,11 @@ describe('dust2jsx', () => {
             expect(result).to.deep.equal(['nelly']);
         });
 
+        it('should know that @select is not external', () => {
+            const result = dust2jsx(readFile('test/examples/switches.html'), { externals: true });
+            expect(result).to.deep.equal(['Icon']);
+        });
+
         // TODO
         xit('should know that @if is not external', () => {});
 

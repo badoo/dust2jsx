@@ -156,6 +156,9 @@ function replaceDust(node, context) {
         // Registered helpers
         const helper = helpers[node[1].text];
         if (helper) {
+            if (node[1].text !== 'select') {
+                externals.push(node[1].text);
+            }
             return helper(node, context, replaceDust);
         }
 
