@@ -1,4 +1,4 @@
-<Button foo={bar}
+<Baz foo={bar}
   primary={
     <p></p>
   }

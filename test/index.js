@@ -165,7 +165,7 @@ describe('dust2jsx', () => {
             expect(result1).to.deep.equal([]);
 
             const result2 = dust2jsx(readFile('test/examples/component-literal.html'), { externals: true });
-            expect(result2).to.deep.equal(['Bar', 'Button', 'Icon']);
+            expect(result2).to.deep.equal(['Bar', 'Baz', 'Icon']);
         });
 
         it('should recognise i18n library in templates', () => {

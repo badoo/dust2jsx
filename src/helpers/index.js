@@ -1,4 +1,5 @@
 module.exports = {
     select: require('./select'),
-    PhotoUrl: require('./PhotoUrl')
+    PhotoUrl: require('./PhotoUrl'),
+    Button: require('./Button')
 };
