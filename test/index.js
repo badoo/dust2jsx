@@ -127,7 +127,7 @@ describe('dust2jsx', () => {
 
         describe('@Button', () => {
 
-            xit('should recognise custom @Button helper', () => {
+            it('should recognise custom @Button helper', () => {
                 const result = dust2jsx(readFile('test/examples/buttons.html'));
                 expect(result).to.be.equal(file('test/examples/buttons.jsx'));
             });
