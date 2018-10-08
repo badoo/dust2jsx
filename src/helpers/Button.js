@@ -1,3 +1,4 @@
+const contextualise = require('../contextualise');
 const replaceComponent = require('../replacers/component');
 
 function buttonType(type) {
@@ -61,7 +62,7 @@ function buttonLayout(params) {
 
 // TODO extraClass
 
-function dustButton(params) {
+function dustButton(context, params) {
     const classnames = [
         buttonType(params.type),
         buttonSize(params.size),
@@ -69,10 +70,12 @@ function dustButton(params) {
         params.extraClass
     ].filter(Boolean).join(' ');
 
+    const text = params.text ? `{${contextualise(context)(params.text)}}` : '';
+
     return [
         ['buffer', `<button className="button ${classnames ? `${classnames} ` : ''}js-action js-touchable qa-button">\n`],
         ['buffer', '    <div className="button__content">\n'],
-        ['buffer', '        <span className="button__text js-button-text"></span>\n'],
+        ['buffer', `        <span className="button__text js-button-text">${text}</span>\n`],
         ['buffer', '    </div>\n'],
         ['buffer', '</button>']
     ];
@@ -84,6 +87,9 @@ function Button(node, context, parent) {
         if (param[1][0] === 'literal' && param[2][0] === 'literal') {
             memo[ param[1][1] ] = param[2][1];
         }
+        if (param[1][0] === 'literal' && param[1][1] === 'text') {
+            memo.text = param[2].text;
+        }
         return memo;
     }, {});
 
@@ -92,7 +98,7 @@ function Button(node, context, parent) {
         ['buffer', '{/* '],
         component,
         ['buffer', ' */}\n'],
-        ...dustButton(params)
+        ...dustButton(context, params)
     ];
 }
 

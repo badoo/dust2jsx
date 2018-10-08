@@ -1,7 +1,7 @@
 {/* <Button type="add-photo" text={buttonText} narrow="true" extraClass="js-action"/> */}
 <button className="button button--add-photo button--narrow js-action js-action js-touchable qa-button">
     <div className="button__content">
-        <span className="button__text js-button-text"></span>
+        <span className="button__text js-button-text">{buttonText}</span>
     </div>
 </button>
 
@@ -11,7 +11,7 @@
     /> */}
 <button className="button js-action js-touchable qa-button">
     <div className="button__content">
-        <span className="button__text js-button-text"></span>
+        <span className="button__text js-button-text">{addPhotos}</span>
     </div>
 </button>
 
