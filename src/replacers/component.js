@@ -14,13 +14,9 @@ function replaceComponent(node, context, parent) {
     if (bodies.length) {
 
         // Attempt to improve indentation for parameter blocks
-        let blockSeparator = ['format', ' '];
-        if (bodies.length > 2) {
-            const firstParamFormat = bodies[0][2][bodies[0][2].length - 1];
-            if (firstParamFormat[0] === 'format') {
-                blockSeparator = firstParamFormat;
-            }
-        }
+        let blockFormat = bodies.length > 2 && bodies[0][2][bodies[0][2].length - 1][0] === 'format' ?
+            bodies[0][2][bodies[0][2].length - 1] :
+            ['format', ' '];
 
         // Parameter blocks
         const blocks = bodies.map(param => {
@@ -32,7 +28,7 @@ function replaceComponent(node, context, parent) {
 
             return [
                 'body',
-                blockSeparator,
+                blockFormat,
                 ['buffer', `${contextualise(context)(literal)}={`],
                 parent(paramBody, context),
                 ['buffer', '}']

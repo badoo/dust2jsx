@@ -15,18 +15,20 @@
     </div>
 </button>
 
-{/* <Button type="stroke" extraClass="js-navigation js-click-tracking"
-    text={
-        {nelly.get('gallery_import_title')}
+<div>
+    {/* <Button type="stroke" extraClass="js-navigation js-click-tracking"
+        text={
+            {nelly.get('gallery_import_title')}
+        }
+        attrs={
+            data-action={NAVIGATION_ACTIONS.ADD_PHOTOS}
+            data-tracking_element={ELEMENTS.UPLOAD_PHOTO_CTA}
+            data-qa="add-photos"
     }
-    attrs={
-        data-action={NAVIGATION_ACTIONS.ADD_PHOTOS}
-        data-tracking_element={ELEMENTS.UPLOAD_PHOTO_CTA}
-        data-qa="add-photos"
-}
-    /> */}
+        /> */}
 <button className="button button--stroke js-navigation js-click-tracking js-action js-touchable qa-button">
     <div className="button__content">
         <span className="button__text js-button-text"></span>
     </div>
 </button>
+</div>

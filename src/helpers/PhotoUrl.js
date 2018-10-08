@@ -16,7 +16,7 @@ function PhotoUrl(node, context) {
 
     return [
         'body',
-        ['buffer', '${photoUrl({ '],
+        ['buffer', '${PhotoUrl({ '],
         ['buffer', params.splice(1).map(param => `${param[1][1]}: ${getVal(param[2])}`).join(', ')],
         ['buffer', ' })}'],
     ];
