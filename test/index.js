@@ -124,6 +124,15 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
             expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
         });
+
+        describe('@Button', () => {
+
+            xit('should recognise custom @Button helper', () => {
+                const result = dust2jsx(readFile('test/examples/buttons.html'));
+                expect(result).to.be.equal(file('test/examples/buttons.jsx'));
+            });
+
+        });
     });
 
     describe('(#) loops', () => {
