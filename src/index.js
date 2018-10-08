@@ -116,6 +116,29 @@ function replaceSwitch(node, context) {
     ];
 }
 
+function replacePhotoUrl(node, context) {
+    const params = node[3];
+
+    function getVal(param) {
+        switch (param[0]) {
+        case 'literal':
+            return param[1];
+        case 'path':
+            return contextualise(context)(param.text);
+        default:
+            return contextualise(context)(param.text);
+        }
+    }
+
+    return [
+        'body',
+        ['buffer', '${photoUrl({ '],
+        ['buffer', params.splice(1).map(param => `${param[1][1]}: ${getVal(param[2])}`).join(', ')],
+        ['buffer', ' })}'],
+    ];
+    return node;
+}
+
 function replaceComponent(node, context) {
     // Component params
     const params = node[3].slice(1).map(param => {
@@ -199,6 +222,11 @@ function replaceDust(node, context) {
         // Switch
         if (node[1].text === 'select') {
             return replaceSwitch(node, context);
+        }
+
+        // PhotoUrl helper
+        if (node[1].text === 'PhotoUrl') {
+            return replacePhotoUrl(node, context);
         }
 
         // Component

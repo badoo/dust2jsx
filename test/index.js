@@ -120,7 +120,7 @@ describe('dust2jsx', () => {
         });
 
         // TODO
-        xit('should recognize @PhotoUrl helper', () => {
+        it('should recognize @PhotoUrl helper', () => {
             const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
             expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
         });
