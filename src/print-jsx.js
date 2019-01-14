@@ -4,6 +4,7 @@ function replaceAttrs(html) {
         .replace('class="', 'className="')
         .replace(' class={`', ' className={`')
         .replace(' for="', ' htmlFor="')
+        .replace(' maxlength=', ' maxLength=') // TODO test
         .replace(' xlink:href="', ' xlinkHref="');
 }
 
