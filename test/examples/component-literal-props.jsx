@@ -1,4 +1,4 @@
-<Baz foo={props.bar}
+<Baz foo={props.bar} booly={true}
   primary={
     <p></p>
   }
@@ -9,7 +9,7 @@
 }
   />
 
-<Icon foo={props.bar} only={
+<Icon foo={props.bar} fooly={false} only={
     <i></i>
 }
   />

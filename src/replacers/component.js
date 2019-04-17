@@ -2,10 +2,15 @@ const contextualise = require('../contextualise');
 
 const externals = require('../externals');
 
+const BOOLEANS = ['true', 'false'];
+
 function replaceComponent(node, context, parent) {
     // Component params
     const params = node[3].slice(1).map(param => {
-        const value = param[2][0] === 'literal' ? `"${param[2][1]}"` : `{${contextualise(context)(param[2].text)}}`;
+        const value = param[2][0] === 'literal' ?
+            `"${param[2][1]}"` :
+            (BOOLEANS.includes(param[2].text) ? `{${param[2].text}}` : `{${contextualise(context)(param[2].text)}}`);
+
         return `${param[1][1]}=${value}`;
     });
 
