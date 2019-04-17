@@ -29,7 +29,7 @@ function replaceComponent(node, context, parent) {
             return [
                 'body',
                 blockFormat,
-                ['buffer', `${contextualise(context)(literal)}={`],
+                ['buffer', `${literal}={`],
                 parent(paramBody, context),
                 ['buffer', '}']
             ];

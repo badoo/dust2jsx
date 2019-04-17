@@ -105,6 +105,11 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/component-literal.jsx'));
         });
 
+        it('should recognize literal blocks inside component with properly applied context', () => {
+            const result = dust2jsx(readFile('test/examples/component-literal.html'), { context: 'props' });
+            expect(result).to.be.equal(file('test/examples/component-literal-props.jsx'));
+        });
+
         // {@select key=type}
         //   {@eq value="..."
         //   {@default}
