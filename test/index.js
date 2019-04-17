@@ -26,8 +26,10 @@ describe('dust2jsx', () => {
     });
 
     it('should respect passed :context parameter', () => {
-        const result = dust2jsx(readFile('test/examples/context.html'), { context: 'foo' });
-        expect(result).to.be.equal(file('test/examples/context.jsx'));
+        const result1 = dust2jsx(readFile('test/examples/context.html'));
+        expect(result1).to.be.equal(file('test/examples/context.jsx'));
+        const result2 = dust2jsx(readFile('test/examples/context.html'), { context: 'foo' });
+        expect(result2).to.be.equal(file('test/examples/context-foo.jsx'));
     });
 
     // {text|s}

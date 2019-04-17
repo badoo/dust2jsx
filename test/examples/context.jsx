@@ -1,21 +1,21 @@
-<p>{foo.title}</p>
+<p>{title}</p>
 
-{foo.text ?
+{text ?
 <div className="header">
   <div>
-    <p>{foo.text}</p>
+    <p>{text}</p>
   </div>
 </div>
  : null}
 
-{foo.images.map(item =>
+{images.map(item =>
 <img src={item.img.src}>{item.foo}</div>
 )}
 
 {{
-  [foo.IMG2]: (
-    <Icon name={foo.picture.value}/>
+  [IMG2]: (
+    <Icon name={picture.value}/>
   )
-}[foo.picture]}
+}[picture]}
 
-<Footer text={foo.text}/>
+<Footer text={text}/>
