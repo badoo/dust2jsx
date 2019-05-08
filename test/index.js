@@ -50,6 +50,12 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/inline-partial.jsx'));
     });
 
+    // ="foo {bar} baz"
+    it('should replace quoted references', () => {
+        const result = dust2jsx(readFile('test/examples/quoted-references.html'));
+        expect(result).to.be.equal(file('test/examples/quoted-references.jsx'));
+    });
+
     // TODO
     xit('should convert svg content', () => {
         const result = dust2jsx(readFile('test/examples/svg.html'));
@@ -126,10 +132,13 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/index.jsx'));
         });
 
-        // TODO
-        it('should recognize @PhotoUrl helper', () => {
-            const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
-            expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
+        describe('@PhotoUrl', () => {
+
+            it('should recognize @PhotoUrl helper', () => {
+                const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
+                expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
+            });
+
         });
 
         describe('@Button', () => {

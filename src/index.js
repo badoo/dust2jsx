@@ -3,7 +3,7 @@ const pegjs = require('pegjs');
 const parser = require('./parser');
 
 const dangerouslySetInnerHTML = require('./visitors/dangerously-set-inner-html');
-const improveClassNameConditions = require('./visitors/improve-class-name-conditions');
+const fixQuotedReferences = require('./visitors/fix-quoted-references');
 const removeQuotesAroundReference = require('./visitors/remove-quotes-around-reference');
 
 const replaceInlinePartials = require('./replacers/inline-partials');
@@ -144,8 +144,8 @@ function dust2jsx(code, { context, externals: externalsParam }={}) {
     tokens = replaceInlinePartials(tokens);
     tokens = replaceDust(tokens, context || '');
     dangerouslySetInnerHTML(tokens);
-    improveClassNameConditions(tokens);
     removeQuotesAroundReference(tokens);
+    fixQuotedReferences(tokens);
 
     if (externalsParam === true) {
         return externals.get();
