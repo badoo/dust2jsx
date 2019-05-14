@@ -1,6 +1,6 @@
 {
   "name": "dust2jsx",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -308,7 +308,7 @@
         "anymatch": "2.0.0",
         "async-each": "1.0.3",
         "braces": "2.3.2",
-        "fsevents": "1.2.8",
+        "fsevents": "1.2.9",
         "glob-parent": "3.1.0",
         "inherits": "2.0.3",
         "is-binary-path": "1.0.1",
@@ -737,9 +737,9 @@
       "dev": true
     },
     "fsevents": {
-      "version": "1.2.8",
-      "resolved": "https://registry.npmjs.org/fsevents/-/fsevents-1.2.8.tgz",
-      "integrity": "sha512-tPvHgPGB7m40CZ68xqFGkKuzN+RnpGmSV+hgeKxhRpbxdqKXUFJGC3yonBOLzQBcJyGpdZFDfCsdOC2KFsXzeA==",
+      "version": "1.2.9",
+      "resolved": "https://registry.npmjs.org/fsevents/-/fsevents-1.2.9.tgz",
+      "integrity": "sha512-oeyj2H3EjjonWcFjD5NvZNE9Rqe4UW+nQBU2HNeKw0koVLEFIhtyETyAakeAM3de7Z/SW5kcA+fZUait9EApnw==",
       "dev": true,
       "optional": true,
       "requires": {
@@ -1827,9 +1827,9 @@
       }
     },
     "nodemon": {
-      "version": "1.18.11",
-      "resolved": "https://registry.npmjs.org/nodemon/-/nodemon-1.18.11.tgz",
-      "integrity": "sha512-KdN3tm1zkarlqNo4+W9raU3ihM4H15MVMSE/f9rYDZmFgDHAfAJsomYrHhApAkuUemYjFyEeXlpCOQ2v5gtBEw==",
+      "version": "1.19.0",
+      "resolved": "https://registry.npmjs.org/nodemon/-/nodemon-1.19.0.tgz",
+      "integrity": "sha512-NHKpb/Je0Urmwi3QPDHlYuFY9m1vaVfTsRZG5X73rY46xPj0JpNe8WhUGQdkDXQDOxrBNIU3JrcflE9Y44EcuA==",
       "dev": true,
       "requires": {
         "chokidar": "2.1.5",
