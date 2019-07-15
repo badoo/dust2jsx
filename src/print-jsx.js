@@ -5,7 +5,10 @@ function replaceAttrs(html) {
         .replace(' class={`', ' className={`')
         .replace(' for="', ' htmlFor="')
         .replace(' for={`', ' htmlFor={`')
-        .replace(' maxlength=', ' maxLength=') // TODO test
+        .replace('fill-opacity=', 'fillOpacity=')
+        .replace('maxlength=', 'maxLength=') // TODO test
+        .replace('autocomplete=', 'autoComplete=')
+        .replace('spellcheck=', 'spellCheck=')
         .replace(' xlink:href="', ' xlinkHref="');
 }
 
