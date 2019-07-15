@@ -62,6 +62,12 @@ describe('dust2jsx', () => {
         expect(result).to.be.equal(file('test/examples/svg.jsx'));
     });
 
+    // <img ... >
+    it('should close some unclosed HTML tags', () => {
+        const result = dust2jsx(readFile('test/examples/unclosed-tags.html'));
+        expect(result).to.be.equal(file('test/examples/unclosed-tags.jsx'));
+    });
+
     // {?...}
     // {^...}
     describe('(?^) conditions', () => {

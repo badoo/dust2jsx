@@ -6,7 +6,7 @@ function replaceAttrs(html) {
         .replace(' for="', ' htmlFor="')
         .replace(' for={`', ' htmlFor={`')
         .replace('fill-opacity=', 'fillOpacity=')
-        .replace('maxlength=', 'maxLength=') // TODO test
+        .replace('maxlength=', 'maxLength=')
         .replace('autocomplete=', 'autoComplete=')
         .replace('spellcheck=', 'spellCheck=')
         .replace(' xlink:href="', ' xlinkHref="');

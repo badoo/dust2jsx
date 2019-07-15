@@ -12,6 +12,7 @@ const replaceComponent = require('./replacers/component');
 const helpers = require('./helpers');
 const contextualise = require('./contextualise');
 const printJsx = require('./print-jsx');
+const closeTags = require('./close-tags');
 
 const externals = require('./externals');
 
@@ -139,6 +140,8 @@ function replaceDust(node, context) {
 
 function dust2jsx(code, { context, externals: externalsParam }={}) {
     externals.clear();
+
+    code = closeTags(code);
 
     let tokens = parser.parse(code);
     tokens = replaceInlinePartials(tokens);
