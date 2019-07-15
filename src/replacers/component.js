@@ -31,6 +31,25 @@ function replaceComponent(node, context, parent) {
                 return paramBody;
             }
 
+            const body = parent(paramBody, context);
+
+            // One line body - but not component or new tag
+            // String already
+            if (body.length === 4 && body[2][0] === 'buffer' && !body[2][1].startsWith('<')) {
+                let bodyString = body[2][1];
+                if (!bodyString.startsWith('{')) {
+                    bodyString = `"${bodyString}"`;
+                }
+
+                return [
+                    'body',
+                    blockFormat,
+                    ['buffer', `${literal}=${bodyString}`]
+                ];
+            }
+
+            // TODO One line body - reference
+
             return [
                 'body',
                 blockFormat,

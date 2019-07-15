@@ -138,20 +138,17 @@ describe('dust2jsx', () => {
             expect(result).to.be.equal(file('test/examples/index.jsx'));
         });
 
-        describe('@PhotoUrl', () => {
-
-            it('should recognize @PhotoUrl helper', () => {
-                const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
-                expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
-            });
-
+        // {@Button}
+        it('should convert common @Button usages', () => {
+            const result = dust2jsx(readFile('test/examples/buttons.html'));
+            expect(result).to.be.equal(file('test/examples/buttons.jsx'));
         });
 
-        describe('@Button', () => {
+        describe('@PhotoUrl', () => {
 
-            it('should recognise custom @Button helper', () => {
-                const result = dust2jsx(readFile('test/examples/buttons.html'));
-                expect(result).to.be.equal(file('test/examples/buttons.jsx'));
+            it('should recognize custom @PhotoUrl helper', () => {
+                const result = dust2jsx(readFile('test/examples/photo-url-helper.html'));
+                expect(result).to.be.equal(file('test/examples/photo-url-helper.jsx'));
             });
 
         });
@@ -208,9 +205,5 @@ describe('dust2jsx', () => {
             const result = dust2jsx(readFile('test/examples/switches.html'), { externals: true });
             expect(result).to.deep.equal(['Icon']);
         });
-
-        // TODO
-        xit('should know that @if is not external', () => {});
-
     });
 });
