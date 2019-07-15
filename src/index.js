@@ -121,7 +121,8 @@ function replaceDust(node, context) {
             const lexeme = body[1][1].text;
             return [
                 'buffer',
-                `{nelly.get('${lexeme}')}`
+                `{nelly.get('${lexeme}')}`,
+                body[1][2] // 'filters'
             ];
         }
 
