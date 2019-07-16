@@ -50,11 +50,29 @@ function replaceComponent(node, context, parent) {
 
             // TODO One line body - reference
 
+            // Special rules for 'attrs' attribute
+            if (literal === 'attrs') {
+                body.forEach((item, ndx) => {
+                    if (item[0] === 'buffer') {
+                        item[1] = `'${item[1].replace('=', '\': ')}`
+                        body[ndx] = item;
+                    }
+                });
+
+                return [
+                    'body',
+                    blockFormat,
+                    ['buffer', `${literal}={{`],
+                    body,
+                    ['buffer', '}}']
+                ];
+            }
+
             return [
                 'body',
                 blockFormat,
                 ['buffer', `${literal}={`],
-                parent(paramBody, context),
+                body,
                 ['buffer', '}']
             ];
         });
