@@ -9,10 +9,12 @@ const removeQuotesAroundReference = require('./visitors/remove-quotes-around-ref
 const replaceInlinePartials = require('./replacers/inline-partials');
 const replaceComponent = require('./replacers/component');
 
+const closeTags = require('./html/close-tags');
+const styleAttribute = require('./html/style-attribute');
+
 const helpers = require('./helpers');
 const contextualise = require('./contextualise');
 const printJsx = require('./print-jsx');
-const closeTags = require('./close-tags');
 
 const externals = require('./externals');
 
@@ -155,7 +157,7 @@ function dust2jsx(code, { context, externals: externalsParam }={}) {
         return externals.get();
     }
 
-    return printJsx(tokens);
+    return styleAttribute(printJsx(tokens));
 }
 
 module.exports = dust2jsx;

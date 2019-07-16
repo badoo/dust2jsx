@@ -1,4 +1,4 @@
-<img src="foo" />
+<img style={{ maxWidth:30px; }} src="foo"/>
 
 <input type="text" maxLength="3"/>
 
